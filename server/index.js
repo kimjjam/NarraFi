@@ -23,12 +23,10 @@ mongoose.connect(MONGO_URL, {
 
 // ✅ 미들웨어
 app.use(cors({
-    origin: [
-        "https://https://narrafi-front-xj3c.onrender.com",  // ✅ 프론트 도메인 정확히 등록
-        "http://localhost:3000"
-    ],
+    origin: process.env.CLIENT_URL,
     credentials: true
 }));
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -38,15 +36,15 @@ app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
 
 // ✅ Socket.IO
-const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: [CLIENT_URL, "http://localhost:3000"],
+        origin: process.env.CLIENT_URL,
         methods: ["GET", "POST"],
         credentials: true
     },
     path: "/socket.io"
 });
+
 
 // ✅ 실시간 통신
 io.on("connection", (socket) => {
@@ -91,5 +89,5 @@ io.on("connection", (socket) => {
 
 // ✅ 서버 시작
 server.listen(PORT, () => {
-    console.log(`✅ 서버 실행 중: http://localhost:${PORT}`);
+    console.log(`✅ 서버 실행 중 (PORT: ${PORT})`);
 });
