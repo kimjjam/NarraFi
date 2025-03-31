@@ -24,7 +24,7 @@ mongoose.connect(MONGO_URL, {
 // ✅ 미들웨어
 app.use(cors({
     origin: [
-        "https://narrafichatapp-front.run.goorm.site",  // ✅ 프론트 도메인 정확히 등록
+        "https://https://narrafi-front-xj3c.onrender.com",  // ✅ 프론트 도메인 정확히 등록
         "http://localhost:3000"
     ],
     credentials: true
