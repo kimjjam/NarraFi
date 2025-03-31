@@ -23,11 +23,8 @@ mongoose.connect(MONGO_URL, {
 
 // ✅ CORS 설정 (render + localhost 둘 다 허용)
 app.use(cors({
-<<<<<<< HEAD
+
     origin: [CLIENT_URL, "http://localhost:3000"],
-=======
-    origin: process.env.CLIENT_URL,
->>>>>>> 0474a2548252eb67464d3ae48dce641e7b0ef0a5
     credentials: true
 }));
 
@@ -39,12 +36,8 @@ app.get('/api', (req, res) => res.json({ message: 'API is working' }));
 app.use('/api/auth', authRoutes);
 app.use('/api/rooms', roomRoutes);
 
-<<<<<<< HEAD
 // ✅ http 서버 생성 (⚠️ socket 전에 필수)
 const server = http.createServer(app);
-
-=======
->>>>>>> 0474a2548252eb67464d3ae48dce641e7b0ef0a5
 // ✅ Socket.IO
 const io = new Server(server, {
     cors: {
