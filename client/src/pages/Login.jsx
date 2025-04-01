@@ -28,7 +28,7 @@ const Login = () => {
                 <h2>Welcome to NarraFi!</h2>
                 <p>다시 만나니 너무 반가워요!</p>
 
-                <label>(기수) 이름을 입력해 주세요! ex)(1기) 김재민</label>
+                <label>(기수) 이름을 입력해 주세요!        ex)(1기) 김재민</label>
                 <input
                     type="email"
                     placeholder="이메일"
