@@ -29,7 +29,7 @@ const Register = () => {
                 <p>계정을 만들어 대화에 참여하세요</p>
                 <input
                     type="email"
-                    placeholder="(기수) 이름   ex)(1기) 김재민"
+                    placeholder="(기수) 이름        ex)(1기) 김재민"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
