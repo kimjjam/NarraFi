@@ -31,7 +31,7 @@ const Login = () => {
                 <label>(기수) 이름을 입력해 주세요!                    ex) (1기) 김재민</label>
                 <input
                     type="email"
-                    placeholder="이메일"
+                    placeholder="(기수) 이름을 입력해 주세요!"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
