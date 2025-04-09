@@ -1,13 +1,16 @@
 body, html, #root {
     height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
     background: #313338;
     font-family: 'Noto Sans KR', sans-serif;
+    overflow-x: hidden; // 👉 가로 여백 방지
 }
 
 * {
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; // 👉 모바일 터치 하이라이트 제거
 }
 
 button {
