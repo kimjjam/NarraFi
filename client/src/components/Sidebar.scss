@@ -1,83 +1,90 @@
 .sidebar {
-    background: #2b2d31;
-    width: 240px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    border-right: 1px solid #1e1f22;
+  background: #2b2d31;
+  width: 240px;
+  padding: 16px;
+  margin: 0; // ✅ 여백 제거
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-right: 1px solid #1e1f22;
+
+  .logo {
+    color: #b9bbbe;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0; // ✅ 혹시 여백 방지
+  }
+
+  .section {
+    p {
+      color: #888;
+      font-size: 12px;
+      margin-bottom: 8px;
+    }
+
+    a {
+      display: block;
+      color: #b9bbbe;
+      text-decoration: none;
+      padding: 8px;
+      border-radius: 4px;
+
+      &:hover {
+        background: #383a40;
+      }
+    }
+  }
+
+  .logout {
+    margin-top: auto;
+    background: #f04747;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    &:hover {
+      background: #d93e3e;
+    }
+  }
+
+  // 📱 Mobile Responsive
+  @media (max-width: 768px) {
+    flex-direction: row;
+    width: 100%;
+    height: 48px; // ✅ 더 얇은 높이
+    padding: 4px 8px;
+    margin: 0; // ✅ 바깥 여백 제거
+    padding-bottom: 0;
+    align-items: center;
+    justify-content: space-between;
+    border-right: none; // ✅ 상단바이므로 우측선 제거
+    border-bottom: 1px solid #1e1f22; // ✅ 구분선 추가 (옵션)
 
     .logo {
-        color: #b9bbbe;
-        font-weight: bold;
-        font-size: 20px;
+      font-size: 16px;
+      margin: 0;
     }
 
     .section {
-        p {
-            color: #888;
-            font-size: 12px;
-            margin-bottom: 8px;
-        }
+      display: flex;
+      gap: 8px;
 
-        a {
-            display: block;
-            color: #b9bbbe;
-            text-decoration: none;
-            padding: 8px;
-            border-radius: 4px;
+      p {
+        display: none;
+      }
 
-            &:hover {
-                background: #383a40;
-            }
-        }
+      a {
+        padding: 6px;
+        font-size: 12px;
+      }
     }
 
     .logout {
-        margin-top: auto;
-        background: #f04747;
-        color: white;
-        border: none;
-        padding: 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: 0.2s;
-
-        &:hover {
-            background: #d93e3e;
-        }
+      padding: 6px 8px;
+      font-size: 12px;
     }
-
-    // 📱 Mobile Responsive
-    @media (max-width: 768px) {
-        flex-direction: row;
-        width: 100%;
-        height: 56px;
-        padding: 8px;
-        align-items: center;
-        justify-content: space-between;
-
-        .logo {
-            font-size: 16px;
-        }
-
-        .section {
-            display: flex;
-            gap: 8px;
-
-            p {
-                display: none;
-            }
-
-            a {
-                padding: 6px;
-                font-size: 12px;
-            }
-        }
-
-        .logout {
-            padding: 6px 8px;
-            font-size: 12px;
-        }
-    }
+  }
 }
