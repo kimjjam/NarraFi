@@ -120,9 +120,13 @@
     }
 
     .message-bubble {
-        max-width: 80%;
+        max-width: 100%;
         padding: 6px 10px;
         border-radius: 6px;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
 
         .delete-btn {
             top: 2px;
