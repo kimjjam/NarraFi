@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import "./Login.scss";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +19,17 @@ const Login = () => {
         } catch (err) {
             setMessage(err.response?.data?.message || "로그인 실패");
         }
+    };
+
+    // 네이버 로그인 처리
+    const handleNaverLogin = () => {
+        // 네이버 로그인 페이지로 리디렉션
+        const clientId = process.env.REACT_APP_NAVER_CLIENT_ID;
+        const redirectUri = `${process.env.REACT_APP_CLIENT_URL}/auth/naver/callback`;
+        const state = Math.random().toString(36).substring(2);
+        const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
+
+        window.location.href = naverAuthUrl;
     };
 
     return (
@@ -48,6 +58,11 @@ const Login = () => {
 
                 <button type="button" onClick={handleLogin}>로그인</button>
                 <button type="button" onClick={() => navigate("/register")}>회원가입</button>
+                
+                {/* 네이버 로그인 버튼 추가 */}
+                <button type="button" onClick={handleNaverLogin} className="naver-login-btn">
+                    네이버 로그인
+                </button>
             </form>
         </div>
     );
