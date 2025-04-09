@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react"; // ✅ useRef 추가
 import { SocketContext } from "../contexts/SocketContext";
 import "./Chat.scss";
 
@@ -7,11 +7,11 @@ const Chat = () => {
     const [messages, setMessages] = useState([]);
     const [text, setText] = useState("");
     const userId = localStorage.getItem("userId") || `user-${Math.floor(Math.random() * 10000)}`;
+    const messagesEndRef = useRef(null); // ✅ 추가: 마지막 메시지 참조
 
     useEffect(() => {
         if (!socket) return;
 
-        // ✅ 반드시 리스너 먼저 등록
         const handleInitMessages = (msgs) => setMessages(msgs);
         const handleReceiveMessage = (msg) => setMessages((prev) => [...prev, msg]);
         const handleMessageDeleted = (deletedId) => setMessages((prev) => prev.filter((m) => m._id !== deletedId));
@@ -20,16 +20,19 @@ const Chat = () => {
         socket.on("receiveMessage", handleReceiveMessage);
         socket.on("messageDeleted", handleMessageDeleted);
 
-        // ✅ joinRoom은 맨 마지막에 호출 (순서 중요)
         socket.emit("joinRoom", { roomId: "general", userId });
 
-        // ✅ cleanup
         return () => {
             socket.off("initMessages", handleInitMessages);
             socket.off("receiveMessage", handleReceiveMessage);
             socket.off("messageDeleted", handleMessageDeleted);
         };
     }, [socket, userId]);
+
+    // ✅ 메시지 변경 시 스크롤 아래로 이동
+    useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [messages]);
 
     const handleSend = () => {
         if (!text.trim()) return;
@@ -58,6 +61,7 @@ const Chat = () => {
                         )}
                     </div>
                 ))}
+                <div ref={messagesEndRef} /> {/* ✅ 자동 스크롤 위치 */}
             </div>
             <div className="chat-input">
                 <input
