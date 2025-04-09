@@ -90,7 +90,8 @@ router.get('/naver/callback', async (req, res) => {
             // 만약 존재하지 않는 유저라면 새로운 유저 생성
             user = new User({
                 email: profile.email,
-                password: "naver_social_login", // 비밀번호를 따로 생성하거나 설정하세요
+                naverId: profile.id, // 네이버 ID 저장
+                password: "naver_social_login", // 비밀번호는 임시로 설정
             });
             await user.save();
         }
