@@ -1,5 +1,5 @@
 import "./Login.scss";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -26,11 +26,23 @@ const Login = () => {
         // 네이버 로그인 페이지로 리디렉션
         const clientId = process.env.REACT_APP_NAVER_CLIENT_ID;
         const redirectUri = `${process.env.REACT_APP_CLIENT_URL}/auth/naver/callback`;
-        const state = Math.random().toString(36).substring(2);
+        const state = Math.random().toString(36).substring(2); // 임의의 state 값
         const naverAuthUrl = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}`;
 
+        // URL로 리디렉션
         window.location.href = naverAuthUrl;
     };
+
+    // 네이버 로그인 후 토큰 처리
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const token = urlParams.get("token");
+
+        if (token) {
+            localStorage.setItem("token", token);
+            navigate("/chat");  // 로그인 후 채팅 페이지로 이동
+        }
+    }, [navigate]);
 
     return (
         <div className="login-container">
